@@ -8,7 +8,7 @@ const BlogSchema = new Schema({
     required: true,
   },
   authorProfilePic: {
-    type: Image,
+    type: [],
     required: false
   }, 
   title: {
