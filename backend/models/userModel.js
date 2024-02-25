@@ -28,7 +28,7 @@ userSchema.statics.signup = async function(userName, email, password) {
   //validation
   if (!userName || !email || !password) {
     throw Error('All fields must be filled');
-  }
+  } 
   if (!validator.isEmail(email)) {
     throw Error('Email is not valid');
   }
@@ -44,8 +44,8 @@ userSchema.statics.signup = async function(userName, email, password) {
   }
 
   //password hashing 
-  const salt = bycrypt.genSalt(10);
-  const hash = bycrypt.hash(password, salt);
+  const salt = await bycrypt.genSalt(10);
+  const hash = await bycrypt.hash(password, salt);
 
   const user = await User.create({ userName, email, password: hash});
 
@@ -54,10 +54,10 @@ userSchema.statics.signup = async function(userName, email, password) {
 
 
 //LOGIN FUNCTION
-userSchema.statics.login = async function(userName, email, password) {
+userSchema.statics.login  = async function(email, password) {
 
   //validation
-  if (!userName || !email || !password) {
+  if (!email || !password) {
     throw Error('All fields must be filled');
   }
 
@@ -71,7 +71,7 @@ userSchema.statics.login = async function(userName, email, password) {
   //compare password
   const passwordMatch = await bycrypt.compare(password, user.password);
 
-  if (!password) {
+  if (!passwordMatch) {
     throw Error('Incorrect password');
   }
 

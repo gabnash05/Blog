@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
 import blogsRouter from './routes/blogs.js';
+import usersRouter from './routes/user.js';
 
 const app = express();
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.json());
 
 //routes
 app.use('/api/blogs', blogsRouter);
+app.use('/api/users', usersRouter);
 
 
 //connect to database
