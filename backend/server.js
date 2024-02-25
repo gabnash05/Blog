@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 import blogsRouter from './routes/blogs.js';
 
@@ -8,6 +9,7 @@ dotenv.config();
 
 //environment variables
 const PORT = process.env.PORT;
+const MONGO_URI = process.env.MONGO_URI;
 
 
 //middleware
@@ -18,4 +20,17 @@ app.use(express.json());
 app.use('/api/blogs', blogsRouter);
 
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+//connect to database
+async function connect() {
+  mongoose.connect(MONGO_URI)
+    .then(() => {
+      app.listen(PORT, () => console.log(`connected to database and listening on port ${PORT}`));
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
+connect();
+
+
