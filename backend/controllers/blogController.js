@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 
 export async function getAllBlogs(req, res) {
 
-  const user_id = req.user_id
+  const user_id = req.user._id;
 
-  const blogs = await Blogs.find({user_id}).sort({createdAt: -1})
+  const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
   
   res.status(200).json(blogs);
 }
@@ -31,10 +31,10 @@ export async function getOneBlog(req, res) {
 export async function postBlog(req, res) {
 
   const { author, title, content } = req.body;
-  //const user_id = req.user_id;
+  const user_id = req.user._id;
 
   try {
-    const blog = await Blogs.create({ author, title, content, /*user_id */ });
+    const blog = await Blogs.create({ author, title, content, user_id });
     res.status(200).json(blog);
 
   } catch (error) {

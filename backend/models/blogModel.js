@@ -21,6 +21,10 @@ const BlogSchema = new Schema({
   }, 
   file: {
     type: [],
+  }, 
+  user_id: {
+    type: String,
+    required: true
   }
 }, {timestamps: true});
 

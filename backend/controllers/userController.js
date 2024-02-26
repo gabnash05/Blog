@@ -36,3 +36,11 @@ export async function logInUser(req, res) {
     res.status(400).json({error: error.message})
   }
 }
+
+//FOR TESTING 
+export async function getAllUsers(req, res) {
+
+  const users = await User.find().sort({createdAt: -1});
+
+  res.status(200).json(users);
+}
