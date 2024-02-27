@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllBlogs, getOneBlog, postBlog, deleteBlog, updateBlog } from '../controllers/blogController.js';
+import { getUserBlogs, getOneBlog, postBlog, deleteBlog, updateBlog, getAllBlogs } from '../controllers/blogController.js';
 import requireAuth from "../middleware/requireAuth.js";
 
 

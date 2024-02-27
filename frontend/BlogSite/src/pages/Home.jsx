@@ -40,24 +40,31 @@ export default function Home() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className='postBlogForm' onSubmit={handleSubmit}>
         <h3>Post New Blog</h3>
+        <br></br>
 
-        <label>Title</label>
-        <input 
-          type="text"
-          onChange={e => setTitle(e.target.value)}
-          value={title}
-        />
+        <div>
+          <label>Title</label>
+          <input 
+            type="text"
+            onChange={e => setTitle(e.target.value)}
+            value={title}
+          />
+        </div>
+        
+        <div>
+          <label>Content</label>
+          <textarea 
+            onChange={e => setContent(e.target.value)}
+            value={content}
+          />
+        </div>
+        
+        <div className="blogControls">
+          <button>Post</button>
+        </div>
 
-        <label>Content</label>
-        <input 
-          type="text"
-          onChange={e => setContent(e.target.value)}
-          value={content}
-        />
-
-        <button>Post</button>
       </form>
     </div>
   )

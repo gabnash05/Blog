@@ -4,9 +4,7 @@ import mongoose from "mongoose";
 
 export async function getAllBlogs(req, res) {
 
-  const user_id = req.user._id;
-
-  const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
+  const blogs = await Blogs.find().sort({createdAt: -1});
   
   res.status(200).json(blogs);
 }

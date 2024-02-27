@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import Blogs from "../models/blogModel.js";
 import jwt from "jsonwebtoken";
 
 
@@ -36,6 +37,18 @@ export async function logInUser(req, res) {
     res.status(400).json({error: error.message})
   }
 }
+
+export async function getUserBlogs(req, res) {
+
+  const user_id = req.params.id;
+
+  console.log(user_id);
+
+  const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
+  
+  res.status(200).json(blogs);
+}
+
 
 //FOR TESTING 
 export async function getAllUsers(req, res) {
