@@ -1,71 +1,26 @@
-import { useState } from "react"
+import BlogCard from "../components/BlogCard"
 
 
 export default function Home() {
 
-  const [author, setAuthor] = useState('kimgab');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [user_id, setUser_Id] = useState('65db6d7c796a0a77db2dcd65');
-
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    const blog = { author, title, content, user_id }
-
-    const response = await fetch('http://localhost:4500/api/blogs', {
-      method: 'POST',
-      body: JSON.stringify(blog),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRjYTc5ZDM5YTQwMzZkMTg3Y2UwZjkiLCJpYXQiOjE3MDg5NjEzMzMsImV4cCI6MTcwOTIyMDUzM30.JPAfAefwJx5FwuvBxELaR4Zd4X2Oybe21upISKHhQWk`
-      }
-    })
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      console.log(json.error);
-    }
-
-    if (response.ok) {
-      setTitle('');
-      setContent('');
-
-      console.log("New blog added", json);
-    }
-
-  }
+  const card = {id: 1,
+                url: 'https://staticg.sportskeeda.com/editor/2023/03/59a4b-16784801127741.png?w=840', 
+                title: 'Vinland Saga',
+                desc: 'How one of the best mangas ever made changed my life.',
+                date: '5 days ago'  
+              }
 
   return (
     <div>
-      <form className='postBlogForm' onSubmit={handleSubmit}>
-        <h3>Post New Blog</h3>
-        <br></br>
+      <div>
 
-        <div>
-          <label>Title</label>
-          <input 
-            type="text"
-            onChange={e => setTitle(e.target.value)}
-            value={title}
-          />
-        </div>
-        
-        <div>
-          <label>Content</label>
-          <textarea 
-            onChange={e => setContent(e.target.value)}
-            value={content}
-          />
-        </div>
-        
-        <div className="blogControls">
-          <button>Post</button>
-        </div>
+      </div>
 
-      </form>
+      <BlogCard card={card}/>
+
+      <div>
+
+      </div>
     </div>
   )
 }
