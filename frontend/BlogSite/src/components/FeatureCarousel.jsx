@@ -2,9 +2,16 @@ import { motion, useTransform, useScroll } from "framer-motion"
 import { useRef } from "react"
 
 import BlogCard from "./BlogCard"
+import Navbar from "./Navbar"
 
 export default function FeatureCarousel() {
 
+  const user = {
+    author: 'KimGab',
+    blogDesc: 'Daily Vinland blogs and updates',
+    profilePic: 'https://www.animeexplained.com/wp-content/uploads/2023/05/Thorfinn-True-warrior-featured.jpg'
+  }
+  
   const cards = [{
     id: 1,
     url: 'https://staticg.sportskeeda.com/editor/2023/03/59a4b-16784801127741.png?w=840', 
@@ -68,12 +75,40 @@ export default function FeatureCarousel() {
 
   return (
     <section className="carousel" ref={targetRef}>
+
+
       <div className="carousel-viewport">
+
+        <Navbar />
+
+        <div className="carousel-header">
+
+          <div className="carousel-title">
+            <img className="carousel-profile-pic" src={user.profilePic}/>
+            <div>
+              <h1>{user.author}</h1>
+              <p>{user.blogDesc}</p>
+            </div>
+          </div>
+
+          <div className="carousel-controls">
+            <button className="add-new">Add New Post</button>
+            <button>←</button>
+            <p>{1}</p>
+            <button>→</button>
+          </div>
+
+        </div>
+        
+        
         <motion.div style={{ x }} className="carousel-content">
           {cards.map((card) => {
             return <BlogCard card={card} key ={card.id}/>
           })}
         </motion.div>
+
+        <div className="carousel-bottom-dash" />
+
       </div>
     </section>
   )

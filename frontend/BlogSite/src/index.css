@@ -1,10 +1,14 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Nanum+Gothic&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* colors */
 :root {
-  --primary: #1aac83;
+  --primary: #bf7997;
+  --primary_hover: rgb(173, 116, 141);
+  --light: #f6eded;
+  --light_hover: #ffffff;
   --error: #e7195a;
 }
 
@@ -17,14 +21,151 @@ body {
 
 
 
+/*temporary*/
+.template {
+  height: 100vh;
+  background-color: rgb(39, 39, 39);
+}
+
+
+
+/* CAROUSEL */
+.carousel {
+  position: relative;
+  height: 300vh;
+  background-color: rgb(168, 168, 168);
+}
+
+.carousel-viewport {
+  display: flex;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: var(--light);
+  overflow: hidden;
+}
+
+.carousel-content {
+  margin-top: 25vh;
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-title {
+  margin-top: 5vh;
+  display: flex;
+  position: absolute;
+  top: 8vh;
+  left: 5vw;
+}
+
+.carousel-title div h1 {
+  margin: 0 25px;
+  font-size: 40px;
+  font-weight: 400;
+  font-family: "Noto Serif", sans-serif;
+  color:rgb(45, 45, 45);
+  cursor: pointer;
+}
+
+.carousel-title div h1:hover {
+  text-decoration: underline;
+}
+
+.carousel-title div p {
+  margin: 0 25px;
+}
+
+.carousel-bottom-dash {
+  position: absolute;
+  bottom: 10.5vh;
+  left: 5vw;
+  width:87vw;
+  height: 2px;
+  background-color: var(--primary);
+}
+
+.carousel-profile-pic {
+  object-fit: cover;
+  border-radius: 100%;
+  height: 70px;
+  width: 70px;
+}
+
+.carousel-profile-pic:hover {
+  cursor: pointer;
+  filter: brightness(1.2);
+}
+
+.carousel-controls {
+  display: flex;
+  position: absolute;
+  top: 18vh;
+  right: 5vw;
+  align-items: center;
+}
+
+.carousel-controls button {
+  background: var(--light);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+  transition: background 0.2s ease-in-out;
+}
+
+.carousel-controls button:hover {
+  background-color: var(--light_hover);
+}
+
+.add-new {
+  flex: 3;
+}
+
+.carousel-controls p {
+  color: var(--primary);
+  font-weight: 600;
+  border: 1.5px solid var(--primary);
+  border-radius: 4px;
+  padding: 2px 7px;
+  margin: 0 15px 0 20px;
+  text-align: center;
+}
+
+/*Title Size changes*/
+@media (max-height: 670px) {
+  .carousel-title {
+    font-size: 50px;
+  }
+}
+
+@media (max-height: 620px) {
+  .carousel-title {
+    font-size: 30px;
+  }
+}
+
+@media (max-height: 560px) {
+  .carousel-title {
+    font-size: 0px;
+  }
+}
+
+
+
+
 /* CARD */
 .blog-card {
   position: relative;
-  height: 450px;
-  width: 450px;
+  height: 380px;
+  width: 380px;
   overflow: hidden;
   background-color: rgb(251, 251, 251);
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   margin: 20px;
   cursor: pointer;
@@ -68,34 +209,58 @@ body {
 }
 
 
-/*temporary*/
-.template {
-  height: 100vh;
-  background-color: rgb(39, 39, 39);
-}
 
+/* NAVBAR */
 
-/* CAROUSEL */
-.carousel {
-  position: relative;
-  height: 300vh;
-  background-color: rgb(168, 168, 168);
-}
-
-.carousel-viewport {
-  display: flex;
-  position: sticky;
+.navbar {
+  position: fixed;
   top: 0;
-  height: 100vh;
-  background-color: rgb(255, 216, 234);
+  z-index: 10;
+  width: 100vw;
+  height: 50px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
   align-items: center;
-  overflow: hidden;
+  background-color: var(--primary);
 }
 
-.carousel-content {
-  display: flex;
-  gap: 10px;
+.navbar h4 {
+  font-weight: 400;
+  flex: 2;
+  color: var(--light)
 }
+
+.navbar h2 {
+  color: var(--light);
+  font-size: 30px;
+  margin-left: 50px;
+  flex: 5;
+  color: var(--light)
+}
+
+.navbar .nav-button {
+  width: 20px;
+  flex: 1;
+}
+
+.navbar .nav-button button {
+  background: var(--light);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+  transition: background 0.2s ease-in-out;
+}
+
+.navbar .nav-button button:hover {
+  background: var(--light_hover);
+}
+
 
 
 
@@ -139,7 +304,7 @@ body {
 }
 
 form button {
-  background: var(--primary);
+  background: var(--light);
   border: 0;
   color: #fff;
   padding: 10px;
