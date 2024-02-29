@@ -32,7 +32,7 @@ body {
 }
 
 .blog-card:hover {
-  transform: scale(1.03);
+  transform: scale(1.015);
 }
 
 .blog-image {
@@ -68,8 +68,34 @@ body {
 }
 
 
+/*temporary*/
+.template {
+  height: 100vh;
+  background-color: rgb(39, 39, 39);
+}
 
 
+/* CAROUSEL */
+.carousel {
+  position: relative;
+  height: 300vh;
+  background-color: rgb(168, 168, 168);
+}
+
+.carousel-viewport {
+  display: flex;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: rgb(255, 216, 234);
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel-content {
+  display: flex;
+  gap: 10px;
+}
 
 
 
