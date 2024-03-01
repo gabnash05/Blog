@@ -15,12 +15,16 @@ const BlogSchema = new Schema({
     type: String,
     required: true
   },
+  desc: {
+    type: String,
+    required: true
+  },
   content: {
     type: String,
     required: true
   }, 
-  file: {
-    type: [],
+  img: {
+    type: String,
   }, 
   user_id: {
     type: String,

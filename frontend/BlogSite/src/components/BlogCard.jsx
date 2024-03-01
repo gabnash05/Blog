@@ -5,7 +5,7 @@ export default function BlogCard({ card }) {
   return (
     <div id={card.id} className="blog-card">
 
-      <img src={`${card.url}`} className="blog-image"/>
+      <img src={`${card.img}`} className="blog-image"/>
 
       <div className="blog-title">
         <p>{card.title}</p>
@@ -16,7 +16,7 @@ export default function BlogCard({ card }) {
       </div>
 
       <div className="blog-date">
-        <p>{card.date}</p>
+        <p>{card.createdAt}</p>
       </div>
       
     </div>

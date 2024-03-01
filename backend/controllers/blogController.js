@@ -28,11 +28,12 @@ export async function getOneBlog(req, res) {
 
 export async function postBlog(req, res) {
 
-  const { author, title, content } = req.body;
-  const user_id = req.user._id;
+  const { author, title, desc, img, content} = req.body;
+  const user_id = '65db6d7c796a0a77db2dcd65'
+  //const user_id = req.user._id;
 
   try {
-    const blog = await Blogs.create({ author, title, content, user_id });
+    const blog = await Blogs.create({ author, title, desc, img, content, user_id });
     res.status(200).json(blog);
 
   } catch (error) {

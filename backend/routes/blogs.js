@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserBlogs, getOneBlog, postBlog, deleteBlog, updateBlog, getAllBlogs } from '../controllers/blogController.js';
+import { getOneBlog, postBlog, deleteBlog, updateBlog, getAllBlogs } from '../controllers/blogController.js';
 import requireAuth from "../middleware/requireAuth.js";
 
 
@@ -7,7 +7,7 @@ const blogsRouter = express.Router();
 
 
 //AUTHENTICATION
-blogsRouter.use(requireAuth);
+//blogsRouter.use(requireAuth);
 
 
 //GET ALL BLOGS

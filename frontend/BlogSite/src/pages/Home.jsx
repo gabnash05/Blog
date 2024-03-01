@@ -1,4 +1,5 @@
-import FeatureCarousel from "../components/FeatureCarousel"
+//components
+import FeatureCarousel from "../components/FeatureCarousel";
 
 
 export default function Home() {
@@ -7,9 +8,7 @@ export default function Home() {
 
   return (
     <div>
-
-      <FeatureCarousel/>
-
+      <FeatureCarousel />
     </div>
   )
 }
