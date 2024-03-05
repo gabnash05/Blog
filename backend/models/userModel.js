@@ -3,7 +3,7 @@ import validator from "validator";
 import bycrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
-
+ 
 const userSchema = new Schema({
   userName: {
     type: String,
@@ -18,12 +18,18 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  profilePic: {
+    type: String,
+  }, 
+  blogDesc: {
+    type: String
   }
 });
 
 
 //SIGN UP FUNCTION
-userSchema.statics.signup = async function(userName, email, password) {
+userSchema.statics.signup = async function(userName, email, password, profilePic, blogDesc) {
 
   //validation
   if (!userName || !email || !password) {
@@ -47,7 +53,7 @@ userSchema.statics.signup = async function(userName, email, password) {
   const salt = await bycrypt.genSalt(10);
   const hash = await bycrypt.hash(password, salt);
 
-  const user = await User.create({ userName, email, password: hash});
+  const user = await User.create({ userName, email, password: hash, profilePic, blogDesc});
 
   return user;
 }

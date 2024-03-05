@@ -3,6 +3,7 @@
 
   //context
   import useBlogsContext from "../hooks/useBlogsContext";
+  import useAuthContext from "../hooks/useAuthContext";
 
   //components
   import BlogCard from "./BlogCard"
@@ -10,21 +11,22 @@
 
 
 
-
   export default function FeatureCarousel() {
     
     const { blogs, dispatch } = useBlogsContext();
+    const { user } = useAuthContext();
 
-    console.log(blogs);
+    console.log(user);
 
     useEffect(() => {
       async function fetchBlogs() {
         const response = await fetch('http://localhost:4500/api/blogs', {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
         });
 
         const json = await response.json();
-
-        console.log(json);
 
         if (!response.ok) {
           console.log(json.error);
@@ -36,17 +38,14 @@
         }
       }
       
-      fetchBlogs();
-      
+      if (user) {
+        fetchBlogs();
+      }
 
-    }, [dispatch]);
+    }, [dispatch, user]);
 
 
-    const user = {  
-      author: 'Thorfinn',
-      blogDesc: 'Daily Vinland blogs and updates',
-      profilePic: 'https://www.animeexplained.com/wp-content/uploads/2023/05/Thorfinn-True-warrior-featured.jpg'
-    }
+
 
     //Horizontal Scrolling
     const targetRef = useRef(null);
@@ -70,7 +69,7 @@
             <div className="carousel-title">
               <img className="carousel-profile-pic" src={user.profilePic}/>
               <div>
-                <h1>{user.author}</h1>
+                <h1>{user.userName}</h1>
                 <p>{user.blogDesc}</p>
               </div>
             </div>
@@ -85,9 +84,13 @@
           </div>
 
           <motion.div style={{ x }} className="carousel-content">
-            {blogs && blogs.map((blog) => {
-              return <BlogCard card={blog} key={blog._id} />
-            })}
+            {blogs ? 
+              blogs.map((blog) => {
+                return <BlogCard card={blog} key={blog._id} />
+              })
+              :
+              <h2>Loading...</h2>
+            }
           </motion.div>
           
 

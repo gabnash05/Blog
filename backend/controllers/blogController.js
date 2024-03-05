@@ -1,10 +1,13 @@
 import Blogs from "../models/blogModel.js";
+import User from "../models/userModel.js";
+
 import mongoose from "mongoose";
 
 
 export async function getAllBlogs(req, res) {
+  const user_id = req.user._id;
 
-  const blogs = await Blogs.find().sort({createdAt: -1});
+  const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
   
   res.status(200).json(blogs);
 }
@@ -29,8 +32,7 @@ export async function getOneBlog(req, res) {
 export async function postBlog(req, res) {
 
   const { author, title, desc, img, content} = req.body;
-  const user_id = '65db6d7c796a0a77db2dcd65'
-  //const user_id = req.user._id;
+  const user_id = req.user._id; 
 
   try {
     const blog = await Blogs.create({ author, title, desc, img, content, user_id });

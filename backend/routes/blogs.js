@@ -7,7 +7,7 @@ const blogsRouter = express.Router();
 
 
 //AUTHENTICATION
-//blogsRouter.use(requireAuth);
+blogsRouter.use(requireAuth);
 
 
 //GET ALL BLOGS
