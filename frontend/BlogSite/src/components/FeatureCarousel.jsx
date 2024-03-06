@@ -1,5 +1,5 @@
   import { motion, useTransform, useScroll } from "framer-motion"
-  import { useEffect, useRef } from "react"
+  import { useEffect, useRef, useState } from "react"
 
   //context
   import useBlogsContext from "../hooks/useBlogsContext";
@@ -8,6 +8,7 @@
   //components
   import BlogCard from "./BlogCard"
   import Navbar from "./Navbar"
+  import BlogForms from "./BlogForms";
 
 
 
@@ -16,7 +17,7 @@
     const { blogs, dispatch } = useBlogsContext();
     const { user } = useAuthContext();
 
-    console.log(user);
+    const [isNewBlog, setIsNewBlog] = useState(false);
 
     useEffect(() => {
       async function fetchBlogs() {
@@ -44,7 +45,10 @@
 
     }, [dispatch, user]);
 
-
+    //Prop for blog forms
+    function closeBlogForm() {
+      setIsNewBlog(false);
+    };
 
 
     //Horizontal Scrolling
@@ -62,6 +66,12 @@
 
         <div className="carousel-viewport">
 
+          {isNewBlog ? 
+            <BlogForms onClose={closeBlogForm}/>
+            :
+            <></>
+          }
+
           <Navbar />
 
           <div className="carousel-header">
@@ -75,7 +85,7 @@
             </div>
 
             <div className="carousel-controls">
-              <button className="add-new">Add New Post</button>
+              <button className="add-new" onClick={() => setIsNewBlog(true)}>Add New Post</button>
               <button>←</button>
               <p>{1}</p>
               <button>→</button>

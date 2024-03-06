@@ -31,8 +31,12 @@ export async function getOneBlog(req, res) {
 
 export async function postBlog(req, res) {
 
-  const { author, title, desc, img, content} = req.body;
-  const user_id = req.user._id; 
+  const { author, title, desc, content} = req.body;
+  const user_id = req.user._id;
+
+  //
+  const img = 'https://staticg.sportskeeda.com/editor/2023/03/59a4b-16784801127741.png?w=840';
+  //
 
   try {
     const blog = await Blogs.create({ author, title, desc, img, content, user_id });
