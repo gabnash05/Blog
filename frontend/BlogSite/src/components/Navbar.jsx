@@ -1,22 +1,37 @@
 import { Link } from 'react-router-dom'
 
+import useAuthContext from '../hooks/useAuthContext'
+import useLogout from '../hooks/useLogout';
+
 export default function Navbar() {
 
-  function handleLogout() {
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
 
+  function handleLogout() {
+    logout();
   }
 
   return(
     <nav>
       <div className='navbar'>
 
-        <h2>BLOGPOST</h2>
+        <h2><Link to='/'>BLOGPOST</Link></h2>
 
-        {}
-        <h4>nasayaokim@gmail.com</h4>
-        <nav className="nav-button">
-          <button onClick={handleLogout}>Log Out</button>
-        </nav>
+        {user ? 
+        <div className='logged-in'>
+          <h4>{user.email}</h4>
+          <nav className="nav-button">
+            <button onClick={handleLogout}>Log Out</button>
+          </nav>
+        </div>
+        :
+          <div className='logged-out'>
+            <Link to='/login'>Login</Link>
+            <Link to='/signup'>Signup</Link>
+          </div>
+        }
+        
         
 
       </div>

@@ -50,6 +50,11 @@
       setIsNewBlog(false);
     };
 
+    //select one blog
+    function handleSelectBlog() {
+      
+    }
+
 
     //Horizontal Scrolling
     const targetRef = useRef(null);
@@ -96,7 +101,7 @@
           <motion.div style={{ x }} className="carousel-content">
             {blogs ? 
               blogs.map((blog) => {
-                return <BlogCard card={blog} key={blog._id} />
+                return <BlogCard card={blog} key={blog._id} onClick={() => handleSelectBlog}/>
               })
               :
               <h2>Loading...</h2>
