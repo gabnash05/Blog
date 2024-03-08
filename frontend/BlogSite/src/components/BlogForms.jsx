@@ -18,6 +18,7 @@ export default function BlogForms({ onClose }) {
     setAuthor(user.userName);
   }, [author])
   
+  //Submit form
   async function handleSubmit(e) {
     e.preventDefault();
     

@@ -312,9 +312,9 @@ body {
 .post-blog-form {
   position: absolute;
   z-index: 15;
-  left: 35vw;
+  left: 17.5vw;
   top: 12vh;
-  width: 30vw;
+  width: 65vw;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -328,15 +328,19 @@ body {
   text-align: center;
 }
 
+.post-blog-form  label {
+  text-align: right;
+}
+
 .post-blog-form  div {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 6fr;
   gap: 16px;
   margin-bottom: 15px;
 }
 
 .post-blog-form input {
-  width: 100%;
+  width: 98%;
   padding: 5px;
 }
 
@@ -377,4 +381,44 @@ body {
 
 .close-form:hover {
   background: rgb(244, 244, 244) !important;
+}
+
+
+
+/*BLOG PAGE*/
+
+pre {
+  white-space: pre-wrap;
+  font-family: 'Poppins';
+}
+
+.blog-page {
+  display: flex;
+  flex-direction: column;
+  padding: 70px 20px;
+  align-items: center;
+}
+
+.blog-page h1 {
+  font-weight: 600;
+  font-size: 3.5em;
+  margin: 35px 0 0 0;
+}
+
+.blog-page h4 {
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.1em;
+  margin-top: 15px;
+}
+
+.blog-page p {
+  text-align: left;
+  max-width: 70vw;
+}
+
+.blog-page img {
+  max-width: 40vw;
+  max-height: 40vh;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.307);
 }

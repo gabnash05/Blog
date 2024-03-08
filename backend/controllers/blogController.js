@@ -11,7 +11,7 @@ export async function getAllBlogs(req, res) {
   
   res.status(200).json(blogs);
 }
-
+ 
 export async function getOneBlog(req, res) {
 
   const { id } = req.params;

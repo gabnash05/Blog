@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import useAuthContext from "./hooks/useAuthContext";
+import BlogPage from "./components/BlogPage";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={user ? <Home/> : <Navigate to='/login'/>} />
             <Route path="/login" element={!user ? <Login/> : <Navigate to='/'/>} />
+            <Route path="/blogs/:blogId" element={!user ? <Login/> : <BlogPage/>} />
           </Routes>
         </div>
       </BrowserRouter>

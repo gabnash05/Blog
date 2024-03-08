@@ -1,9 +1,22 @@
-
+import { useNavigate } from "react-router-dom";
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 export default function BlogCard({ card }) {
 
+  const navigate = useNavigate();
+
+
+  //select one blog
+  function handleSelectBlog() {
+    navigate(`/blogs/${card._id}`);
+  }
+
+  //Date
+  const date = formatDistanceToNow(new Date(card.createdAt), { addSuffix: true});
+
+
   return (
-    <div id={card.id} className="blog-card">
+    <div className="blog-card" onClick={() => handleSelectBlog()}>
 
       <img src={`${card.img}`} className="blog-image"/>
 
@@ -16,7 +29,7 @@ export default function BlogCard({ card }) {
       </div>
 
       <div className="blog-date">
-        <p>{card.createdAt}</p>
+        <p>{date}</p>
       </div>
       
     </div>
