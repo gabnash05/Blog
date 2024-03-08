@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import useAuthContext from "./hooks/useAuthContext";
 import BlogPage from "./components/BlogPage";
+import Signup from "./pages/Signup";
 
 function App() {
 
@@ -14,11 +15,12 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+          <Navbar />
         <div className="pages">
           <Routes>
             <Route path="/" element={user ? <Home/> : <Navigate to='/login'/>} />
             <Route path="/login" element={!user ? <Login/> : <Navigate to='/'/>} />
+            <Route path="/signup" element={!user ? <Signup/> : <Navigate to='/'/>} />
             <Route path="/blogs/:blogId" element={!user ? <Login/> : <BlogPage/>} />
           </Routes>
         </div>

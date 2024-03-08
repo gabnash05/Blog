@@ -10,9 +10,9 @@ function createToken(_id) {
 
 export async function signUpUser(req, res) {
 
-  const { userName, email, password, profilePic, blogDesc } = req.body;
-  //const profilePic = null;
-  //const blogDesc = null;
+  const { userName, email, password} = req.body;
+  const profilePic = null;
+  const blogDesc = null;
 
   try {
     const user = await User.signup(userName, email, password, profilePic, blogDesc);

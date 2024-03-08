@@ -31,14 +31,16 @@ const userSchema = new Schema({
 //SIGN UP FUNCTION
 userSchema.statics.signup = async function(userName, email, password, profilePic, blogDesc) {
 
+  console.log(password)
+
   //validation
   if (!userName || !email || !password) {
     throw Error('All fields must be filled');
   } 
   if (!validator.isEmail(email)) {
-    throw Error('Email is not valid');
+    throw Error('Email is not valid');  
   }
-  if (!validator.isStrongPassword) {
+  if (!validator.isStrongPassword(password)) {
     throw Error('Password is not strong enough');
   }
 

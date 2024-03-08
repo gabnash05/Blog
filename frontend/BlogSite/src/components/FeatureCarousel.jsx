@@ -101,7 +101,7 @@ import BlogForms from "./BlogForms";
                 return <BlogCard card={blog} key={blog._id}/>
               })
               :
-              <h2>Loading...</h2>
+              <h2 className="no-blogs">Loading...</h2>
             }
           </motion.div>
           
