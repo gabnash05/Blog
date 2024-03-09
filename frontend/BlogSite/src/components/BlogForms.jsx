@@ -23,7 +23,7 @@ export default function BlogForms({ onClose }) {
   const [error, setError] = useState(null);
 
   //Image Max File Size
-  const MAX_FILE_SIZE_MB = 1;
+  const MAX_FILE_SIZE_MB = 0.25;
 
 
   useEffect(() => {
