@@ -7,7 +7,8 @@
 :root {
   --primary: #bf7997;
   --primary_hover: rgb(173, 116, 141);
-  --light: #f6eded;
+  --primary_darker: rgb(159, 107, 130);
+  --light: #f4eded;
   --light_hover: #ffffff;
   --error: #e7195a;
 }
@@ -281,6 +282,10 @@ body {
   background: var(--light_hover);
 }
 
+.navbar a:hover {
+  text-decoration: underline;
+}
+
 .navbar .logged-in {
   display: flex;
 }
@@ -379,9 +384,11 @@ body {
 
 .close-form {
   position: absolute;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-self: center;
   padding: 3px;
-  right: 5%;
+  right: 3%;
   height: 39px;
   background: rgb(255, 255, 255) !important;
   border: 2px solid var(--primary) !important;
@@ -455,7 +462,7 @@ pre {
   white-space: pre-wrap;
   font-family: 'Poppins';
   text-align: left;
-  max-width: 70vw;
+  max-width: 60vw;
   
 }
 
@@ -464,6 +471,49 @@ pre {
   max-height: 40vh;
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.307);
 }
+
+.blog-page .delete {
+  display: flex;
+  align-items: center;
+  height:55px;
+  margin: 20px 0px 10px 83vw;
+  padding: 15px 18px;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--light);
+  background-color: var(--primary);
+  border: solid 3px var(--light);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.blog-page .edit {
+  display: flex;
+  align-items: center;
+  height:55px;
+  padding: 15px 18px;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--light);
+  background-color: var(--primary);
+  border: solid 3px var(--light);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+
+.blog-page button:hover {
+  background-color: var(--primary_darker);
+}
+
+.blog-controllers {
+  display: flex;
+  align-items: center;
+}
+
+
 
 
 
@@ -508,10 +558,15 @@ form.login button, form.signup button {
   width: 100px;
   font-weight: bold;
   color: var(--primary);
-  background-color: var(--light_hover);
+  background-color: var(--light);
   border: solid 3px var(--primary);
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+form.login button:hover, form.signup button:hover {
+  background-color: var(--light_hover);
 }
 
 form.login div, form.signup div {
@@ -527,6 +582,10 @@ form.login label, form.signup label {
 
 form.login input, form.signup input {
   padding: 9px;
+  border-radius: 5px;
+  background-color: var(--light);
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.256);
 }
 
 form.login p, form.signup p {

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
+import { FaTrash } from "react-icons/fa";
 
+
+//Hooks
 import useAuthContext from "../hooks/useAuthContext";
 import usePostBlog from "../hooks/usePostBlog";
 
@@ -99,9 +102,9 @@ export default function BlogForms({ onClose }) {
     <div>
       <div className="blog-container">
         <form className='post-blog-form' onSubmit={handleSubmit}>
-          <button className="close-form" onClick={() => onClose()}>X</button>
+          <button className="close-form" onClick={() => onClose()}><FaTrash/></button>
 
-          <h3>Post New Blog</h3>
+          <h3>Add New Post</h3>
           <br></br>
 
           <div>
