@@ -1,58 +1,59 @@
 import { useEffect, useState } from "react"
 
 import useAuthContext from "../hooks/useAuthContext";
-import useBlogsContext from "../hooks/useBlogsContext";
+import usePostBlog from "../hooks/usePostBlog";
 
 
 export default function BlogForms({ onClose }) {
 
   const { user } = useAuthContext();
-  const { dispatch } = useBlogsContext();
+  
+
+  const { postBlog, isLoading } = usePostBlog();
 
   const [author, setAuthor] = useState('');
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [content, setContent] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [error, setError] = useState(null);
+
+
 
   useEffect(() => {
     setAuthor(user.userName);
   }, [author])
+
+
+
   
   //Submit form
   async function handleSubmit(e) {
     e.preventDefault();
+
     
-    const blog = { author, title, desc, content };
+    
 
-    console.log(blog);
-
-    const response = await fetch('http://localhost:4500/api/blogs', {
-      method: 'POST',
-      body: JSON.stringify(blog),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      }
+    await postBlog(author, title, desc, content, selectedImage)
+    .then(() => {
+      onClose();
     })
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      console.log(json.error);  
-    }
-
-    if (response.ok) {
-      setTitle('');
-      setContent('');
-      setDesc('');
-
-      dispatch({type: 'CREATE_BLOG', payload: json})
-
-      console.log("New blog added", json);
-    }
-
-    onClose();
+    .catch ((e) => {
+      setError(e.message);
+    })
+    
   }
+
+
+
+  //Image upload
+  function handleImageUpload(e) {
+    setSelectedImage(e.target.files[0]);
+  }
+
+
+
+
 
   return (
     <div>
@@ -73,10 +74,26 @@ export default function BlogForms({ onClose }) {
           </div>
 
           <div>
+            <label>Blog Image</label>
+            <label htmlFor="file" className="custom-upload-btn">Upload Image</label>
+
+            <input
+              className="img-input"
+              type="file"
+              id="file"
+              accept=".jpeg, .png, .jpg"
+              onChange={handleImageUpload}
+            />
+            <div></div>
+
+            {selectedImage && <span className="file-label">{selectedImage.name}</span>}
+          </div>
+
+          <div>
             <label>Description</label>
             <textarea
               className="desc-input"
-              rows={4}
+              rows={1}
               onChange={e => setDesc(e.target.value)}
               value={desc}
             />
@@ -86,15 +103,18 @@ export default function BlogForms({ onClose }) {
             <label>Content</label>
             <textarea
               className="content-input"
-              rows={12}
+              rows={10}
               onChange={e => setContent(e.target.value)}
               value={content}
             />
           </div>
           
           <div className="blogControls">
-            <button>Post</button>
+            <div></div>
+            <button disabled={isLoading}>Post</button>
           </div>
+
+          {error && <span className="blog-post-error">{error}</span>}
 
         </form>
       </div>

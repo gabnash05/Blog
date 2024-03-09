@@ -31,8 +31,6 @@ const userSchema = new Schema({
 //SIGN UP FUNCTION
 userSchema.statics.signup = async function(userName, email, password, profilePic, blogDesc) {
 
-  console.log(password)
-
   //validation
   if (!userName || !email || !password) {
     throw Error('All fields must be filled');

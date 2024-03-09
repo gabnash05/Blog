@@ -46,7 +46,7 @@ export default function BlogPage() {
           <img src={blog.img}></img>
           <h1>{blog.title}</h1>
           <h4>{blog.desc}</h4>
-          <p><pre id="output">{blog.content}</pre></p>
+          <p>{blog.content}</p>
         </div>
       ) : (
         <div>Loading...</div>
