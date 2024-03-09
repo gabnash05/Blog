@@ -360,8 +360,9 @@ body {
   background: var(--primary);
   border: 0;
   color: var(--light);
-  padding: 10px;
+  padding: 8px;
   font-family: "Poppins";
+  font-size: 17px;
   border-radius: 4px;
   cursor: pointer;
 }

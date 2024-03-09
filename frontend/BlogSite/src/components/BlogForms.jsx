@@ -16,8 +16,11 @@ export default function BlogForms({ onClose }) {
   const [desc, setDesc] = useState('');
   const [content, setContent] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
+  const [image, setImage] = useState(null)
   const [error, setError] = useState(null);
 
+  //Image Max File Size
+  const MAX_FILE_SIZE_MB = 1;
 
 
   useEffect(() => {
@@ -26,15 +29,11 @@ export default function BlogForms({ onClose }) {
 
 
 
-  
   //Submit form
   async function handleSubmit(e) {
     e.preventDefault();
 
-    
-    
-
-    await postBlog(author, title, desc, content, selectedImage)
+    await postBlog(author, title, desc, content, image)
     .then(() => {
       onClose();
     })
@@ -45,11 +44,52 @@ export default function BlogForms({ onClose }) {
   }
 
 
-
   //Image upload
-  function handleImageUpload(e) {
-    setSelectedImage(e.target.files[0]);
+  async function handleImageUpload(e) {
+    
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    
+    try {
+      const base64 = await convertToBase64(file);
+
+      const fileSizeInMB = file.size / (1024 * 1024);
+      if (fileSizeInMB > MAX_FILE_SIZE_MB) {
+        setError(`File size should not exceed ${MAX_FILE_SIZE_MB} MB`);
+        setSelectedImage(null);
+      } 
+      else {
+        setError(null);
+        setImage(base64);
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+
   }
+
+
+
+
+
+  //Image conversion
+  function convertToBase64(file) {
+    return new Promise((resolve, reject) => {
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+      
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
+
 
 
 

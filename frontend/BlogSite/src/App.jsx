@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import useAuthContext from "./hooks/useAuthContext";
-import BlogPage from "./components/BlogPage";
+import BlogPage from "./pages/BlogPage";
 import Signup from "./pages/Signup";
 
 function App() {

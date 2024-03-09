@@ -8,6 +8,7 @@ import useAuthContext from "../hooks/useAuthContext";
 export default function BlogPage() {
 
   const [blog, setBlog] = useState(null);
+  const [image, setImage] = useState(null);
 
   const { blogId } = useParams();
   const { dispatch } = useBlogsContext();

@@ -32,6 +32,7 @@ export async function getOneBlog(req, res) {
 export async function postBlog(req, res) {
 
   const { author, title, desc, content, img} = req.body;
+  
   const user_id = req.user._id;
 
   try {
