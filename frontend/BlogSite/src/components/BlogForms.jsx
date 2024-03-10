@@ -5,6 +5,7 @@ import { FaTrash } from "react-icons/fa";
 //Hooks
 import useAuthContext from "../hooks/useAuthContext";
 import usePostBlog from "../hooks/usePostBlog";
+import convertToBase64 from "../Util/convertToBase64";
 
 
 export default function BlogForms({ onClose }) {
@@ -71,31 +72,6 @@ export default function BlogForms({ onClose }) {
     }
 
   }
-
-
-
-
-
-  //Image conversion
-  function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      }
-      
-      fileReader.onerror = (error) => {
-        reject(error);
-      }
-    })
-  }
-
-
-
-
 
 
   return (

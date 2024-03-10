@@ -16,6 +16,10 @@ function blogsReducer(state, action) {
       return {
         blogs: state.blogs.filter(b => b._id !== action.payload._id)
       }
+    case "UPDATE_BLOG":
+      return {
+        blogs: state.blogs.map(b => b._id === action.payload._id ? action.payload : b)
+      }
     default:
       return state;
   }

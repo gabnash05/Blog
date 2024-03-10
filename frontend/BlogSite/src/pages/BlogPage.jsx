@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
+//Components
+import BlogUpdate from "../components/BlogUpdate";
+
 //Context
 import useBlogsContext from "../hooks/useBlogsContext";
 import useAuthContext from "../hooks/useAuthContext";
@@ -10,6 +13,7 @@ import useAuthContext from "../hooks/useAuthContext";
 export default function BlogPage() {
 
   const [blog, setBlog] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const { blogId } = useParams();
   const { dispatch } = useBlogsContext();
@@ -38,7 +42,7 @@ export default function BlogPage() {
       fetchBlog();
     }
 
-  }, [user]);
+  }, [user, isUpdating]);
 
 
   async function handleDeleteButton() {
@@ -68,13 +72,24 @@ export default function BlogPage() {
   }
 
   function handleEditButton() {
-
+    setIsUpdating(true);
   }
+
+  //close blog update component
+  function closeBlogUpdate() {
+    setIsUpdating(false);
+  };
 
 
 
   return(
     <div>
+      {isUpdating ? 
+            <BlogUpdate onClose={closeBlogUpdate} blog={blog}/>
+            :
+            <></>
+      }
+
       {blog ? (
         <div className="blog-page">
           <div className="blog-controllers">
@@ -88,7 +103,7 @@ export default function BlogPage() {
           <p>{blog.content}</p>
         </div>
       ) : (
-        <h2 className="no-blogs">Loading...</h2>
+        <h2 className="loading-blog-page">Loading...</h2>
       )}
     </div>
   )

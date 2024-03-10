@@ -20,10 +20,23 @@ body {
   font-family: "Poppins";
 }
 
-.pages{
+.pages {
   margin: 0 auto;
 }
 
+.loading {
+  font-weight: 600;
+  text-align: center;
+  margin: none;
+  padding: none;
+}
+
+.loading-blog-page {
+  font-weight: 600;
+  text-align: center;
+  margin-top: 50vh;
+  padding: none;
+}
 
 
 /*temporary*/
@@ -311,15 +324,15 @@ body {
 /* BLOG FORM */
 
 .blog-container {
+  position: fixed;
   z-index: 100;
   height: 100vw;
   width: 100vw;
   background-color: #0000005f;
-  position: absolute;
 }
 
 .post-blog-form {
-  position: absolute;
+  position: fixed;
   z-index: 15;
   left: 17.5vw;
   top: 10vh;
