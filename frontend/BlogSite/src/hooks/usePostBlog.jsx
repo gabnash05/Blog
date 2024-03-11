@@ -1,49 +1,45 @@
-  import { useState } from "react";
+import { useState } from "react";
+import axios from 'axios';
 
-  //Hooks
-  import useBlogsContext from "./useBlogsContext";
-  import useAuthContext from "./useAuthContext";
-
-
-
-  export default function usePostBlog() {
-
-    const [isLoading, setIsLoading] = useState(false);
-
-    const { dispatch } = useBlogsContext();
-    const { user } = useAuthContext();
+//Hooks
+import useBlogsContext from "./useBlogsContext";
+import useAuthContext from "./useAuthContext";
 
 
 
-    async function postBlog(author, title, desc, content, img) {
-      setIsLoading(true);
+export default function usePostBlog() {
 
-      const blog = { author, title, desc, content, img};
+  const [isLoading, setIsLoading] = useState(false);
 
-      const response = await fetch('http://localhost:4500/api/blogs', {
-        method: 'POST',
-        body: JSON.stringify(blog),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+  const { dispatch } = useBlogsContext();
+  const { user } = useAuthContext();
 
-      const json = await response.json();
+  const client = axios.create({
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${user.token}`
+    },
+  });
 
-      if (!response.ok) {
-        setIsLoading(false);
-        throw Error(json.error);
-      }
 
-      if (response.ok) {
-        dispatch({type: 'CREATE_BLOG', payload: json});
-        setIsLoading(false);
-      }
+  async function postBlog(blog) {
+    setIsLoading(true);
+
+    try {
+      const response = await client.post(`http://localhost:4500/api/blogs`, blog);
+      const blogData = response.data;
+
+      dispatch({type: 'CREATE_BLOG', payload: blogData});
+      setIsLoading(false);
     }
-
-
-
-
-    return { postBlog, isLoading };
+    catch (error) {
+      setIsLoading(false);
+      throw Error(error);
+    }
   }
+
+
+
+
+  return { postBlog, isLoading };
+}

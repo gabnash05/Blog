@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import { useEffect, useState } from "react";
 
 export default function BlogCard({ card }) {
+
+  const [date, setDate ] = useState(null);
 
   const navigate = useNavigate();
 
@@ -12,13 +15,17 @@ export default function BlogCard({ card }) {
   }
 
   //Date
-  const date = formatDistanceToNow(new Date(card.createdAt), { addSuffix: true});
+  useEffect(() => {
+    if(card.createdAt) {
+      setDate(formatDistanceToNow(new Date(card.createdAt), { addSuffix: true }));
+    }
+  }, [card.createdAt])
 
 
   return (
     <div className="blog-card" onClick={() => handleSelectBlog()}>
 
-      <img src={`${card.img}`} className="blog-image"/>
+      <img src={`http://localhost:4500/blogImages/${card.img}`} className="blog-image" />
 
       <div className="blog-title">
         <p>{card.title}</p>

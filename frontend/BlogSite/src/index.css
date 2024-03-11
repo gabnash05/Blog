@@ -263,9 +263,10 @@ body {
 }
 
 .navbar h2 {
+  display: flex;
   color: var(--light);
   font-size: 30px;
-  margin-left: 50px;
+  margin: 5px 0px 0px 50px;
   flex: 5;
   color: var(--light)
 }
@@ -459,12 +460,15 @@ pre {
 }
 
 .blog-page h1 {
+  max-width: 80vw;
+  text-align: center;
   font-weight: 600;
   font-size: 3.5em;
   margin: 35px 0 0 0;
 }
 
 .blog-page h4 {
+  max-width: 80vw;
   font-weight: 500;
   font-style: italic;
   font-size: 1.1em;
@@ -480,9 +484,9 @@ pre {
 }
 
 .blog-page img {
-  max-width: 40vw;
-  max-height: 40vh;
-  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.307);
+  max-width: 60vw;
+  max-height: 60vh;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.114);
 }
 
 .blog-page .delete {
@@ -490,7 +494,7 @@ pre {
   align-items: center;
   height:55px;
   margin: 20px 0px 10px 83vw;
-  padding: 15px 18px;
+  padding: 20px 0px;
   font-weight: bold;
   font-size: 18px;
   color: var(--light);
@@ -499,6 +503,16 @@ pre {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.1s ease-in-out;
+}
+
+.blog-page .blog-controllers div a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px
+}
+
+.blog-page .blog-controllers div a:visited {
+  color: var(--light);
 }
 
 .blog-page .edit {

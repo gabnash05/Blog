@@ -5,7 +5,6 @@ import { FaTrash } from "react-icons/fa";
 //Hooks
 import useAuthContext from "../hooks/useAuthContext";
 import usePostBlog from "../hooks/usePostBlog";
-import convertToBase64 from "../Util/convertToBase64";
 
 
 export default function BlogForms({ onClose }) {
@@ -24,7 +23,7 @@ export default function BlogForms({ onClose }) {
   const [error, setError] = useState(null);
 
   //Image Max File Size
-  const MAX_FILE_SIZE_MB = 0.25;
+  const MAX_FILE_SIZE_MB = 5;
 
 
   useEffect(() => {
@@ -37,7 +36,14 @@ export default function BlogForms({ onClose }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await postBlog(author, title, desc, content, image)
+    const data = { author, title, desc, content };
+
+    //append all data to a formData
+    const blog = new FormData();
+    blog.append('img', image);
+    blog.append('data', JSON.stringify(data));
+
+    await postBlog(blog)
     .then(() => {
       onClose();
     })
@@ -55,7 +61,6 @@ export default function BlogForms({ onClose }) {
     setSelectedImage(file);
     
     try {
-      const base64 = await convertToBase64(file);
 
       const fileSizeInMB = file.size / (1024 * 1024);
       if (fileSizeInMB > MAX_FILE_SIZE_MB) {
@@ -64,13 +69,12 @@ export default function BlogForms({ onClose }) {
       } 
       else {
         setError(null);
-        setImage(base64);
+        setImage(file);
       }
     }
     catch (error) {
       console.error(error);
     }
-
   }
 
 

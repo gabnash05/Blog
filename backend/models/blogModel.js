@@ -31,7 +31,7 @@ const blogSchema = new Schema({
 
 
 //POST BLOG FUNCTION
-blogSchema.statics.postBlog = async function(author, title, desc, img, content, user_id) {
+blogSchema.statics.postBlog = async function({ author, title, desc, img, content, user_id }) {
 
   //validation
   if (!title) {

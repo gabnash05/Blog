@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaTrash, FaPencilAlt } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 //Components
 import BlogUpdate from "../components/BlogUpdate";
@@ -20,23 +21,23 @@ export default function BlogPage() {
   const { user } = useAuthContext();
   
   useEffect(() => {
+    const client = axios.create({
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      },
+    });
+
+
     async function fetchBlog() {
-      const response = await fetch(`http://localhost:4500/api/blogs/${blogId}`, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
 
-      const json = await response.json();
-
-      if (!response.ok) {
-        console.log(json.error);
+      client.get(`http://localhost:4500/api/blogs/${blogId}`)
+        .then((blog) => {
+          setBlog(blog.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
       }
-
-      if (response.ok) {
-        setBlog(json);
-      }
-    }
     
     if (user) {
       fetchBlog();
@@ -94,10 +95,16 @@ export default function BlogPage() {
         <div className="blog-page">
           <div className="blog-controllers">
             <button className='edit' onClick={handleEditButton}><FaPencilAlt /></button>
-            <Link to='/'><button className='delete' onClick={handleDeleteButton}><FaTrash /></button></Link>
+            <div>
+              <button className='delete' onClick={handleDeleteButton}>
+                <Link to='/'>
+                  <FaTrash />
+                </Link>
+              </button>
+            </div>
           </div>
           
-          <img src={blog.img}></img>
+          <img src={`http://localhost:4500/blogImages/${blog.img}`} />
           <h1>{blog.title}</h1>
           <h4>{blog.desc}</h4>
           <p>{blog.content}</p>

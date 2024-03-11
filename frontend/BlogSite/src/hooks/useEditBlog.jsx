@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 //Hooks
 import useBlogsContext from "./useBlogsContext";
@@ -12,34 +14,31 @@ export default function useEditBlog() {
 
   const { dispatch } = useBlogsContext();
   const { user } = useAuthContext();
+  const { blogId } = useParams();
 
-
-
-  async function editBlog({ title, desc, content, img, _id }) {
-    setIsLoading(true);
-
-    const blog = { title, desc, content, img };
-
-    const response = await fetch(`http://localhost:4500/api/blogs/${_id}`, {
-      method: 'PATCH',
-      body: JSON.stringify(blog),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      setIsLoading(false);
-      throw Error(json.error);
+  const client = axios.create({
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${user.token}`
     }
+  });
 
-    if (response.ok) {
-      dispatch({type: 'UPDATE_BLOG', payload: json});
+
+  async function editBlog(blog) {
+    setIsLoading(true); 
+
+    try {
+      const response = await client.patch(`http://localhost:4500/api/blogs/${blogId}`, blog);
+      const blogData = response.data;
+      
+      dispatch({type: 'UPDATE_BLOG', payload: blogData});
       setIsLoading(false);
     }
+    catch (error) {
+      setIsLoading(false);
+      throw Error(error);
+    }
+ 
   }
 
 

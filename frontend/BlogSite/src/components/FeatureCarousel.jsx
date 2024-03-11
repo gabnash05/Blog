@@ -1,6 +1,6 @@
 import { motion, useTransform, useScroll } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 //context
 import useBlogsContext from "../hooks/useBlogsContext";
@@ -11,33 +11,37 @@ import BlogCard from "./BlogCard"
 import Navbar from "./Navbar"
 import BlogForms from "./BlogForms";
 
+//hooks
+import usePostBlog from "../hooks/usePostBlog";
+
 
   export default function FeatureCarousel() {
     
     const { blogs, dispatch } = useBlogsContext();
     const { user } = useAuthContext();
-    
+    const { isLoading } = usePostBlog();
+
 
     const [isNewBlog, setIsNewBlog] = useState(false);
+
+    const client = axios.create({
+      headers: {
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
+
 
     //Fetch blogs
     useEffect(() => {
       async function fetchBlogs() {
-        const response = await fetch('http://localhost:4500/api/blogs', {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
-          }
-        });
 
-        const json = await response.json();
-
-        if (!response.ok) {
-          console.log(json.error);
-        }
-
-        if (response.ok) {
-          dispatch({type: 'SET_BLOGS', payload: json});
-        }
+        await client.get('http://localhost:4500/api/blogs')
+          .then((blogs) => {
+            dispatch({type: 'SET_BLOGS', payload: blogs.data}); 
+          })
+          .catch((error) => {
+            console.error(error);
+          })
       }
       
       if (user) {
@@ -96,7 +100,7 @@ import BlogForms from "./BlogForms";
           </div>
 
           <motion.div style={{ x }} className="carousel-content">
-            {blogs ? 
+            {blogs && !isLoading ? 
               blogs.map((blog) => {
                 return <BlogCard card={blog} key={blog._id}/>
               })

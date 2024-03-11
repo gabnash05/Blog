@@ -32,22 +32,19 @@ export async function getOneBlog(req, res) {
 
 export async function postBlog(req, res) {
 
-  console.log(req.body)
-
-  const { author, title, desc, content, img} = req.body;
-  const user_id = req.user._id;
-
-  console.log(req.file);
-
   try {
-    const img = req.file ? req.file.filename : null;
+    const { author, title, desc, content } = JSON.parse(req.body.data);
+    const img = req.files.img[0] ? req.files.img[0].filename : null;
+    const user_id = req.user._id;
 
-    const blog = await Blogs.postBlog(author, title, desc, img, content, user_id);
+    const data = { author, title, desc, content, user_id, img };
+
+    const blog = await Blogs.postBlog(data);
     res.status(200).json(blog);
 
   } catch (error) {
     res.status(400).json({ error: error.message });
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -68,14 +65,26 @@ export async function deleteBlog(req, res) {
 }
 
 export async function updateBlog(req, res) {
+  const { id } = req.params;
+  const { title, desc, content } = JSON.parse(req.body.data);
+  let img = null;
+  let update;
 
-  const { id } = req.params; 
-  
-  const blog = await Blogs.findOneAndUpdate({_id: id}, { ...req.body })
-  
-  if (!blog) {
+  if (req.files.img && req.files.img[0] !== null) {
+    img = req.files.img[0].filename
+    update = { title, desc, content, img }
+  } 
+  else {
+    update = { title, desc, content }
+  }
+
+  try {
+
+    const blog = await Blogs.findOneAndUpdate({_id: id}, { ...update });
+    res.status(200).json(blog);
+  }
+  catch (error) {
     res.status(404).json({error: 'Cannot update, blog not found'});
   }
   
-  res.status(200).json(blog);
 }

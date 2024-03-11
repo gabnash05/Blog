@@ -4,7 +4,6 @@ import { FaTrash } from "react-icons/fa";
 
 //Hooks
 import useEditBlog from "../hooks/useEditBlog";
-import convertToBase64 from "../Util/convertToBase64";
 
 
 export default function BlogUpdate({ onClose, blog }) {
@@ -16,11 +15,11 @@ export default function BlogUpdate({ onClose, blog }) {
   const [desc, setDesc] = useState(blog.desc);
   const [content, setContent] = useState(blog.content);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [img, setImage] = useState(blog.img )
+  const [image, setImage] = useState(null)
   const [error, setError] = useState(null);
 
   //Image Max File Size
-  const MAX_FILE_SIZE_MB = 0.25;
+  const MAX_FILE_SIZE_MB = 5;
 
 
 
@@ -28,7 +27,12 @@ export default function BlogUpdate({ onClose, blog }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const blog = { title, desc, content, img, _id };
+    const data = { title, desc, content };
+
+    //append all data to a formData
+    const blog = new FormData();
+    blog.append('img', image);
+    blog.append('data', JSON.stringify(data));
 
     await editBlog(blog)
     .then(() => {
@@ -49,7 +53,6 @@ export default function BlogUpdate({ onClose, blog }) {
     setSelectedImage(file);
     
     try {
-      const base64 = await convertToBase64(file);
 
       const fileSizeInMB = file.size / (1024 * 1024);
       if (fileSizeInMB > MAX_FILE_SIZE_MB) {
@@ -58,13 +61,12 @@ export default function BlogUpdate({ onClose, blog }) {
       } 
       else {
         setError(null);
-        setImage(base64);
+        setImage(file);
       }
     }
     catch (error) {
       console.error(error);
     }
-
   }
 
 
@@ -77,7 +79,7 @@ export default function BlogUpdate({ onClose, blog }) {
 
       <div className="blog-container">
         <form className='post-blog-form' onSubmit={handleSubmit}>
-          <button className="close-form" onClick={() => onClose()}><FaTrash/></button>
+          <button className="close-form" onClick={() => onClose()}>X</button>
 
           <h3>Edit Post</h3>
           <br></br>
