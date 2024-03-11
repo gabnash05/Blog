@@ -7,10 +7,6 @@ const blogSchema = new Schema({
     type: String,
     required: true,
   },
-  authorProfilePic: {
-    type: [],
-    required: false
-  }, 
   title: {
     type: String,
     required: true

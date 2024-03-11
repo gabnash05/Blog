@@ -4,6 +4,7 @@ import User from "../models/userModel.js";
 import mongoose from "mongoose";
 
 
+
 export async function getAllBlogs(req, res) {
   const user_id = req.user._id;
 
@@ -31,11 +32,16 @@ export async function getOneBlog(req, res) {
 
 export async function postBlog(req, res) {
 
+  console.log(req.body)
+
   const { author, title, desc, content, img} = req.body;
-  
   const user_id = req.user._id;
 
+  console.log(req.file);
+
   try {
+    const img = req.file ? req.file.filename : null;
+
     const blog = await Blogs.postBlog(author, title, desc, img, content, user_id);
     res.status(200).json(blog);
 
