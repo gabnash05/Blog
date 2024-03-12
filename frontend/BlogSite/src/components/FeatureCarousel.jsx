@@ -85,11 +85,18 @@ import usePostBlog from "../hooks/usePostBlog";
           <div className="carousel-header">
 
             <div className="carousel-title">
-              <Link to={`/users/${user.userName}`}><img className="carousel-profile-pic" src={user.profilePic}/></Link>
+              
+              <Link to={`/users/${user.userName}`}>
+                <img className="carousel-profile-pic" src={user.profilePic}/>
+              </Link>
+
               <div>
-                <Link to={`/users/${user.userName}`}><h1>{user.userName}</h1></Link>
+                <Link to={`/users/${user.userName}`}>
+                  <h1>{user.userName}</h1>
+                </Link>
                 <p>{user.blogDesc}</p>
               </div>
+
             </div>
 
             <div className="carousel-controls">

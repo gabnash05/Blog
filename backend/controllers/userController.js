@@ -44,24 +44,11 @@ export async function logInUser(req, res) {
   }
 }
 
-export async function getUserBlogs(req, res) {
+export async function updateUser(req, res) {
 
-  const user_id = req.params.id;
+  const user_email = req.params.email;
 
   const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
   
   res.status(200).json(blogs);
-}
-
-
-//FOR TESTING 
-export async function getAllUsers(req, res) {
-
-  const users = await User.find().sort({createdAt: -1});
-
-  try {
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json({error: error.message})
-  }
 }

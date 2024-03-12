@@ -622,3 +622,77 @@ form.login input, form.signup input {
 form.login p, form.signup p {
   text-align: center;
 }
+
+
+
+
+/*ACCOUNT PAGE*/
+.account-page {
+  margin: 14vh auto;
+  width: 50%;
+  padding: 30px 35px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--light_hover);
+  border-radius: 15px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.186);
+}
+
+.account-page img {
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.account-page h1 {
+  font-weight: 500;
+  font-size: 3.3em;
+  font-family: 'Noto Serif', serif;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.account-page h2 {
+  font-weight: 500;
+  font-size: 1.5em;
+  font-family: 'Noto Serif', serif;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.account-page h3 {
+  font-weight: 600;
+  font-size: 1em;
+  font-family: 'Noto Serif', serif;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+
+.account-page label {
+  margin-bottom: 7px;
+  font-size: .8em;
+  color: var(--primary)
+}
+
+.account-page .account-controllers {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.account-page .account-controllers button {
+  width: 200px;
+  padding: 10px;
+  background-color: var(--light_hover);
+  color: var(--primary);
+  border: solid 3px var(--primary);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.account-page .account-controllers button:hover {
+  background-color: var(--light);
+}

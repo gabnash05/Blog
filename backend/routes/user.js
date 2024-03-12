@@ -1,5 +1,5 @@
 import express from "express";
-import { signUpUser, logInUser, getAllUsers, getUserBlogs } from "../controllers/userController.js";
+import { signUpUser, logInUser, updateUser } from "../controllers/userController.js";
 
 
 const usersRouter = express.Router();
@@ -9,10 +9,7 @@ const usersRouter = express.Router();
 usersRouter.post('/signup', signUpUser);
 //LOGIN
 usersRouter.post('/login', logInUser);
-//GET ALL BLOGS FROM USER
-usersRouter.get('/:id', getUserBlogs);
-
-//TESTING
-usersRouter.get('/login', getAllUsers);
+//GET SINGLE ACCOUNT
+usersRouter.get('/accounts/:email', updateUser)
 
 export default usersRouter;
