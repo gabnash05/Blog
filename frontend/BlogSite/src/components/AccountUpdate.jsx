@@ -18,7 +18,6 @@ export default function AccountUpdate({ onClose }) {
   const [blogDesc, setBlogDesc] = useState(user.blogDesc);
   const [profilePic, setProfilePic] = useState(user.profilePic);
   const [selectedImage, setSelectedImage] = useState(user.profilePic);
-  const [password, setPassword] = useState(user.profilePic);
 
   const [error, setError] = useState(null);
 

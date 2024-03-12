@@ -15,6 +15,7 @@ export default function useUpdateAccount() {
   const { user, dispatch } = useAuthContext();
   const { logout } = useLogout();
 
+  
   const client = axios.create({
     headers: {
       "Authorization": `Bearer ${user.token}`

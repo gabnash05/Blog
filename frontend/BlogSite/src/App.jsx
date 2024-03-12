@@ -24,7 +24,7 @@ function App() {
             <Route path="/login" element={!user ? <Login/> : <Navigate to='/'/>} />
             <Route path="/signup" element={!user ? <Signup/> : <Navigate to='/'/>} />
             <Route path="/blogs/:blogId" element={!user ? <Login/> : <BlogPage/>} />
-            <Route path="/users/:userName" element={!user ? <Login/> : <AccountPage/>} />
+            <Route path="/users/:email" element={!user ? <Login/> : <AccountPage/>} />
           </Routes>
         </div>
       </BrowserRouter>

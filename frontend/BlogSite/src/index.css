@@ -436,6 +436,10 @@ input[type="file"] {
   align-items: center;
 }
 
+.custom-upload-btn:hover {
+  background-color: var(--primary_darker);
+}
+
 .file-label {
   margin-left: 10px;
 }
@@ -629,7 +633,7 @@ form.login p, form.signup p {
 /*ACCOUNT PAGE*/
 .account-page {
   margin: 14vh auto;
-  width: 50%;
+  width: 40%;
   padding: 30px 35px;
   display: flex;
   align-items: center;
@@ -693,6 +697,7 @@ form.login p, form.signup p {
   color: var(--primary);
   border: solid 3px var(--primary);
   border-radius: 9px;
+  font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
@@ -700,6 +705,7 @@ form.login p, form.signup p {
 .account-page .account-controllers button:hover {
   background-color: var(--light);
 }
+
 
 
 
@@ -718,9 +724,9 @@ form.login p, form.signup p {
 .update-account-form {
   position: fixed;
   z-index: 15;
-  left: 13.5vw;
+  left: 18.5vw;
   top: 20vh;
-  width: 65vw;
+  width: 55vw;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -758,7 +764,7 @@ form.login p, form.signup p {
   color: var(--light);
   padding: 8px;
   font-family: "Poppins";
-  font-size: 17px;
+  font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
 }
