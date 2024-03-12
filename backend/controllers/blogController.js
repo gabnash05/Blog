@@ -102,8 +102,6 @@ export async function updateBlog(req, res) {
   }
 
 
-
-
   if (req.files.img) {
 
     //Check if image already exists
@@ -112,7 +110,6 @@ export async function updateBlog(req, res) {
     } else {
       img = req.files.img[0].filename
     }
-
     update = { title, desc, content, img }
     
   } 
@@ -121,9 +118,7 @@ export async function updateBlog(req, res) {
   }
 
 
-  
   try {
-
     const blog = await Blogs.findOneAndUpdate({_id: id}, { ...update });
     res.status(200).json(blog);
   }

@@ -27,6 +27,7 @@ export async function signUpUser(req, res) {
   }
 }
 
+
 export async function logInUser(req, res) {
 
   const { email, password } = req.body;
@@ -44,11 +45,20 @@ export async function logInUser(req, res) {
   }
 }
 
+
 export async function updateUser(req, res) {
+  console.log(req.body)
 
-  const user_email = req.params.email;
+  try {
+    const email = req.params.email;
 
-  const blogs = await Blogs.find({ user_id }).sort({createdAt: -1});
-  
-  res.status(200).json(blogs);
+    const update = req.body
+
+    const account = await User.findOneAndUpdate({ email }, { ...update });
+    
+    res.status(200).json(account);
+  }
+  catch (error) {
+    res.status(400).json({error: error.message});
+  }
 }
