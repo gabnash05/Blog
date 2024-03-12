@@ -34,7 +34,8 @@ export default function usePostBlog() {
     }
     catch (error) {
       setIsLoading(false);
-      throw Error(error);
+      const err = JSON.parse(error.request.responseText)
+      throw Error(err.error);
     }
   }
 

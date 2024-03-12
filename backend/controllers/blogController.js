@@ -34,8 +34,27 @@ export async function postBlog(req, res) {
 
   try {
     const { author, title, desc, content } = JSON.parse(req.body.data);
-    const img = req.files.img[0] ? req.files.img[0].filename : null;
     const user_id = req.user._id;
+
+    let img = null;
+
+
+
+    //Check if image is sent
+    if (req.files.img) {
+      //Check if image already exists
+      if (req.existingImage) {
+        img = req.imageFilename;
+      } 
+      else {
+        img = req.files.img[0].filename;
+      }
+    } else {
+      img = null;
+    }
+
+    
+    
 
     const data = { author, title, desc, content, user_id, img };
 
@@ -70,14 +89,39 @@ export async function updateBlog(req, res) {
   let img = null;
   let update;
 
-  if (req.files.img && req.files.img[0] !== null) {
-    img = req.files.img[0].filename
+
+  //Update validation
+  if (!title) {
+    return res.status(400).json({error: 'Cannot leave title blank'});
+  }
+  if (!desc) {
+    return res.status(400).json({error: 'Cannot leave description blank'});
+  }
+  if (!content) {
+    return res.status(400).json({error: 'Cannot leave content blank'});
+  }
+
+
+
+
+  if (req.files.img) {
+
+    //Check if image already exists
+    if (req.existingImage) {
+      img = req.imageFilename;
+    } else {
+      img = req.files.img[0].filename
+    }
+
     update = { title, desc, content, img }
+    
   } 
   else {
     update = { title, desc, content }
   }
 
+
+  
   try {
 
     const blog = await Blogs.findOneAndUpdate({_id: id}, { ...update });

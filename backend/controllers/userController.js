@@ -18,6 +18,7 @@ export async function signUpUser(req, res) {
     const user = await User.signup(userName, email, password, profilePic, blogDesc);
 
     const token = createToken(user._id);
+    
 
     res.status(200).json({userName, email, token});
 
@@ -36,7 +37,7 @@ export async function logInUser(req, res) {
     const { userName, profilePic, blogDesc } = user;
 
     const token = createToken(user._id);
-    res.status(200).json({userName, email, token, profilePic, blogDesc});
+    res.status(200).json({userName, email, profilePic, blogDesc, token});
     
   } catch (error) {
     res.status(400).json({error: error.message})

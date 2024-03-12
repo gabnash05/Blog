@@ -3,6 +3,7 @@ import multer from 'multer';
 import path from 'path';
 
 import requireAuth from "../middleware/requireAuth.js";
+import checkExistingImage from '../middleware/checkExistingImage.js';
 
 import { getOneBlog, postBlog, deleteBlog, updateBlog, getAllBlogs } from '../controllers/blogController.js';
 

@@ -23,7 +23,7 @@ export default function BlogUpdate({ onClose, blog }) {
 
 
   //Submit form
-  async function handleSubmit(e) {
+  async function handleSubmit(e) {  
     e.preventDefault();
 
     const data = { title, desc, content };
@@ -37,8 +37,8 @@ export default function BlogUpdate({ onClose, blog }) {
     .then(() => {
       onClose();
     })
-    .catch ((e) => {
-      setError(e.message);
+    .catch ((error) => {
+      setError(error.message);
     })
     
   }

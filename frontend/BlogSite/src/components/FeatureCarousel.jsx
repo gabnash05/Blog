@@ -1,5 +1,6 @@
 import { motion, useTransform, useScroll } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 //context
@@ -13,6 +14,7 @@ import BlogForms from "./BlogForms";
 
 //hooks
 import usePostBlog from "../hooks/usePostBlog";
+
 
 
   export default function FeatureCarousel() {
@@ -83,9 +85,9 @@ import usePostBlog from "../hooks/usePostBlog";
           <div className="carousel-header">
 
             <div className="carousel-title">
-              <img className="carousel-profile-pic" src={user.profilePic}/>
+              <Link to={`/users/${user.userName}`}><img className="carousel-profile-pic" src={user.profilePic}/></Link>
               <div>
-                <h1>{user.userName}</h1>
+                <Link to={`/users/${user.userName}`}><h1>{user.userName}</h1></Link>
                 <p>{user.blogDesc}</p>
               </div>
             </div>

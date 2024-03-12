@@ -10,8 +10,6 @@ import usePostBlog from "../hooks/usePostBlog";
 export default function BlogForms({ onClose }) {
 
   const { user } = useAuthContext();
-  
-
   const { postBlog, isLoading } = usePostBlog();
 
   const [author, setAuthor] = useState('');
@@ -47,8 +45,8 @@ export default function BlogForms({ onClose }) {
     .then(() => {
       onClose();
     })
-    .catch ((e) => {
-      setError(e.message);
+    .catch ((error) => {
+      setError(error.message);
     })
     
   }

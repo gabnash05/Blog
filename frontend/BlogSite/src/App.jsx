@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import useAuthContext from "./hooks/useAuthContext";
 import BlogPage from "./pages/BlogPage";
 import Signup from "./pages/Signup";
+import AccountPage from "./pages/AccountPage";
+
 
 function App() {
 
@@ -22,6 +24,7 @@ function App() {
             <Route path="/login" element={!user ? <Login/> : <Navigate to='/'/>} />
             <Route path="/signup" element={!user ? <Signup/> : <Navigate to='/'/>} />
             <Route path="/blogs/:blogId" element={!user ? <Login/> : <BlogPage/>} />
+            <Route path="/users/:userName" element={!user ? <Login/> : <AccountPage/>} />
           </Routes>
         </div>
       </BrowserRouter>

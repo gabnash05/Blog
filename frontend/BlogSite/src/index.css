@@ -86,6 +86,10 @@ body {
   cursor: pointer;
 }
 
+.carousel-title a {
+  text-decoration: none;
+}
+
 .carousel-title div h1:hover {
   text-decoration: underline;
 }
