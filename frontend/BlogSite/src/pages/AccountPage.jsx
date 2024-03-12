@@ -13,27 +13,34 @@ export default function AccountPage() {
 
   const { user } = useAuthContext();
   
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [isUpdatingAccount, setIsUpdatingAccount] = useState(false);
+  const [isUpdatingPassword, setIsUpdatingPassword] = useState(false);
 
-  function closeAccountUpdate() {
-    setIsUpdating(false);
+  function closeUpdateScreens() {
+    setIsUpdatingAccount(false);
+    setIsUpdatingPassword(false);
   };
 
   function handleEditButton() {
-    setIsUpdating(true);
+    setIsUpdatingAccount(true);
   }
   
   return (
     <div>
-      {isUpdating ? 
-        <AccountUpdate onClose={closeAccountUpdate} />
+      {isUpdatingAccount ? 
+        <AccountUpdate onClose={closeUpdateScreens} />
+        :
+        <></>
+      }
+      {isUpdatingPassword ? 
+        <PasswordUpdate onClose={closeUpdateScreens} />
         :
         <></>
       }
       <div className="account-page">
         
 
-        <img src={user.profilePic}></img>
+        <img src={`http://localhost:4500/userImages/${user.profilePic}`}></img>
 
         <h1>{`${user.userName}`}</h1>
         <label>Username</label>

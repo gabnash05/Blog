@@ -7,7 +7,6 @@ function createToken(_id) {
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' });
 } 
 
-
 export async function signUpUser(req, res) {
 
   const { userName, email, password} = req.body;
@@ -27,7 +26,6 @@ export async function signUpUser(req, res) {
   }
 }
 
-
 export async function logInUser(req, res) {
 
   const { email, password } = req.body;
@@ -45,14 +43,33 @@ export async function logInUser(req, res) {
   }
 }
 
-
 export async function updateUser(req, res) {
-  console.log(req.body)
 
+  const { userName, blogDesc } = JSON.parse(req.body.data);
+  const { email } = req.params;
+
+  let profilePic;
+  let update;
+
+
+  if (req.files.profilePic) {
+
+    //Check if image already exists
+    if (req.existingImage) {
+      profilePic = req.imageFilename;
+    } else {
+      profilePic = req.files.profilePic[0].filename
+    }
+    update = { userName, blogDesc, profilePic }
+    
+  } 
+  else {
+    update = { userName, blogDesc }
+  }
+
+
+  //update
   try {
-    const email = req.params.email;
-
-    const update = req.body
 
     const account = await User.findOneAndUpdate({ email }, { ...update });
     

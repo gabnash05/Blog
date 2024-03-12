@@ -18,13 +18,22 @@ export default function AccountUpdate({ onClose }) {
   const [blogDesc, setBlogDesc] = useState(user.blogDesc);
   const [profilePic, setProfilePic] = useState(user.profilePic);
   const [selectedImage, setSelectedImage] = useState(user.profilePic);
-
   const [error, setError] = useState(null);
+
+  //Image Max File Size
+  const MAX_FILE_SIZE_MB = 5;
+
+
 
   async function handleEditAccount(e) {
     e.preventDefault();
 
-    const update = {userName, email, blogDesc};
+    const data = {userName, email, blogDesc};
+
+    //append all data to a formData
+    const update = new FormData();
+    update.append('profilePic', profilePic);
+    update.append('data', JSON.stringify(data));
 
     await updateAccount(update)
       .then(() => {

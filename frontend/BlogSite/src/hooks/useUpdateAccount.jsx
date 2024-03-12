@@ -15,10 +15,11 @@ export default function useUpdateAccount() {
   const { user, dispatch } = useAuthContext();
   const { logout } = useLogout();
 
-  
+
   const client = axios.create({
     headers: {
-      "Authorization": `Bearer ${user.token}`
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${user.token}`
     }
   })
   
@@ -26,11 +27,12 @@ export default function useUpdateAccount() {
 
   async function updateAccount(update) {
 
-    console.log(update)
     setIsLoading(true); 
 
+    const data = JSON.parse(update.get('data'));
+
     try {
-      const response = await client.patch(`http://localhost:4500/api/users/${update.email}`, update); 
+      const response = await client.patch(`http://localhost:4500/api/users/${data.email}`, update); 
       const accountData = response.data;
 
       console.log(accountData)

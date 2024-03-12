@@ -87,7 +87,7 @@ import usePostBlog from "../hooks/usePostBlog";
             <div className="carousel-title">
               
               <Link to={`/users/${user.email}`}>
-                <img className="carousel-profile-pic" src={user.profilePic}/>
+                <img className="carousel-profile-pic" src={`http://localhost:4500/userImages/${user.profilePic}`}/>
               </Link>
 
               <div>
