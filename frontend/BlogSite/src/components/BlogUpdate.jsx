@@ -8,7 +8,6 @@ import useEditBlog from "../hooks/useEditBlog";
 
 export default function BlogUpdate({ onClose, blog }) {
 
-  const { _id } = blog;
   const { editBlog, isLoading } = useEditBlog();
 
   const [title, setTitle] = useState(blog.title);
