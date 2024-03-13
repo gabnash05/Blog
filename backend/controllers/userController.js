@@ -46,6 +46,7 @@ export async function logInUser(req, res) {
 export async function updateUser(req, res) {
 
   const { userName, blogDesc } = JSON.parse(req.body.data);
+
   const { email } = req.params;
 
   let profilePic;
@@ -78,4 +79,24 @@ export async function updateUser(req, res) {
   catch (error) {
     res.status(400).json({error: error.message});
   }
+}
+
+
+export async function updatePassword(req, res, next) {
+  if (!req.body.password) {
+    console.log('account update')
+    next();
+    return;
+  }
+
+  const update = { email: req.params, password: req.body.password }
+
+  try {
+    const account = await User.updatePassword(update);
+    res.status(200).json(account);
+  }
+  catch (error) {
+    res.status(400).json({error: error.message});
+  }
+
 }

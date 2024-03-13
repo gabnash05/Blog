@@ -7,6 +7,7 @@ import useAuthContext from '../hooks/useAuthContext';
 
 //Components
 import AccountUpdate from '../components/AccountUpdate';
+import PasswordUpdate from '../components/PasswordUpdate';
 
 
 export default function AccountPage() {
@@ -21,8 +22,12 @@ export default function AccountPage() {
     setIsUpdatingPassword(false);
   };
 
-  function handleEditButton() {
+  function handleUpdateAccount() {
     setIsUpdatingAccount(true);
+  }
+
+  function handleUpdatePassword() {
+    setIsUpdatingPassword(true);
   }
   
   return (
@@ -52,8 +57,8 @@ export default function AccountPage() {
         <label>Blog Description</label>
 
         <div className='account-controllers'>
-          <button className='edit-details' onClick={handleEditButton}>Edit Account Details</button>
-          <button className='edit-password'>Change Password</button>
+          <button className='edit-details' onClick={handleUpdateAccount}>Edit Account Details</button>
+          <button className='edit-password' onClick={handleUpdatePassword}>Change Password</button>
         </div>
       </div>
     </div>

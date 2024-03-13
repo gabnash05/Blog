@@ -28,6 +28,7 @@ const userSchema = new Schema({
 });
 
 
+
 //SIGN UP FUNCTION
 userSchema.statics.signup = async function(userName, email, password, profilePic, blogDesc) {
 
@@ -59,6 +60,7 @@ userSchema.statics.signup = async function(userName, email, password, profilePic
 }
 
 
+
 //LOGIN FUNCTION
 userSchema.statics.login  = async function(email, password) {
 
@@ -80,6 +82,22 @@ userSchema.statics.login  = async function(email, password) {
   if (!passwordMatch) {
     throw Error('Incorrect password');
   }
+
+  return user;
+}
+
+
+
+//UPDATE PASSWORD FUNCTION
+userSchema.statics.updatePassword = async function(update) {
+  
+  const { password } = update;
+  const { email } = update.email;
+
+  const salt = await bycrypt.genSalt(10);
+  const hash = await bycrypt.hash(password, salt);
+
+  const user = await User.findOneAndUpdate({ email }, { password: hash });
 
   return user;
 }

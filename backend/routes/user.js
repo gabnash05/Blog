@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 
 
-import { signUpUser, logInUser, updateUser } from "../controllers/userController.js";
+import { signUpUser, logInUser, updateUser, updatePassword } from "../controllers/userController.js";
 import requireAuth from "../middleware/requireAuth.js";
 
 
@@ -28,7 +28,7 @@ usersRouter.post('/signup', signUpUser);
 //LOGIN
 usersRouter.post('/login', logInUser);
 //GET SINGLE ACCOUNT
-usersRouter.patch('/:email', requireAuth, upload.fields([
+usersRouter.patch('/:email', requireAuth, updatePassword, upload.fields([
   { name: 'profilePic', maxCount: 1 },
   { name: 'data', maxCount: 1 }
 ]), updateUser);
