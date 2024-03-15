@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { FaTrash } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 
@@ -113,7 +114,7 @@ export default function AccountUpdate({ onClose }) {
           </div>
           
           <div className="blogControls">
-            <div></div>
+            <div/>
             <button disabled={isLoading}>Save Changes</button>
           </div>
 

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import useAuthContext from '../hooks/useAuthContext'
+import useAuthContext from '../hooks/useAuthContext';
 import useLogout from '../hooks/useLogout';
 
 export default function Navbar() {
@@ -22,7 +22,7 @@ export default function Navbar() {
         <div className='logged-in'>
           <h4>{user.email}</h4>
           <nav className="nav-button">
-            <button onClick={handleLogout}>Log Out</button>
+            <Link to='/login'><button onClick={handleLogout}>Log Out</button></Link>
           </nav>
         </div>
         :

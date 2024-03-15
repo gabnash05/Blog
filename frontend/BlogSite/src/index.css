@@ -400,6 +400,11 @@ body {
   justify-content: left;
 }
 
+.blogControls a {
+  color: white;
+  text-decoration: none;
+}
+
 .close-form {
   position: absolute;
   display: flex;
